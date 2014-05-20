@@ -6,6 +6,7 @@
 \usepackage{tabu}
 \usepackage{graphicx}
 \usepackage{lmodern}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -20,13 +21,47 @@
 
 \maketitle
 \tableofcontents
-
+\bibliographystyle{alphadin} 
 
 \chapter{Einf"uhrung}
 \section{Datenbanksynchronisation}
 \section{M"oglichkeiten}
+Wie bereits erw"ahnt ist Datenbanksynchronisation in verschiedensten Bereichen sinnvoll. Anschlie"send ein Überblick von bestehenden L"osungen um g"angige Datenbanken zu Synchronisieren:
+\begin{itemize}
+\item MySQL und SQLite
+\end{itemize}
 \section{Umsetzung im Diplomprojekt}
-\chapter{Couchbase}
-\section{}
 
+\chapter{Couchbase Lite}
+Couchbase Lite ist eine leichtgewichtige, dokumenten-orientierte und leicht synchronisierbare Datenbank welche speziell f"ur den Einsatz in mobilen Anwendungen und Ger"aten geeignet ist.\\\\  Leichtgewichtig bedeutet:
+
+\begin{itemize}
+\item Die Datenbank Engine ist eine in der Applikation gebundene Bibliothek und kein separater Serverprozess.
+\item Sie besitzt sehr klein gehaltenen Code damit Apps die auf die Schnittstelle zur"uckgreifen rasch heruntergeladen werden k"onnen.
+\item Garantiert eine kurze Startzeit da mobile Ger"ate meist geringere CPU-Leistung haben als PCs.
+\item Mobile Datens"atze sind zwar relativ klein, allerdings k"onnen manche Dokumente gro"se multimediale Anh"ange haben, weswegen ein geringe Speicherauslastung von N"oten ist.
+\item Bietet auch eine gute Performance, wobei diese zu einem gro"sen Teil von der implementierten Applikation abh"angt.
+\end{itemize}
+Dokumenten-orientiert bedeutet:
+
+\begin{itemize}
+\item Speichert Eintr"age im flexiblen JSON-Format, weshalb keine vordefinierten Schemata ben"otigt werden.
+\item Dokumente k"onnen eine frei w"ahlbare Gr"o"se von Binary-Anh"angen besitzen, wie z.B. multimediale Inhalte.
+\item Das Datenformat der Applikation kann sich "uber die Zeit weiterentwickeln, ohne dass die Datenbank ge"andert werden muss.
+\item MapReduce Indizierung bietet eine schnelle Datensatzabfrage, ohne dass spezielle Query-Languages verwendet werden m"ussen.
+\end{itemize}
+Leicht synchronisierbar bedeutet:
+\begin{itemize}
+\item Zwei Kopien einer Datenbank k"onnen problemlos "uber einen Replikations-Algorithmus synchronisiert werden.
+\item Die Synchronisation kann On-Demand oder fortlaufend stattfinden.
+\item Ger"ate k"onnen auch nur Teilmengen einer riesigen Datenbasis eines Remote-Servers synchronisieren.
+\item Die Sync-Engine erlaubt auch das Synchronisieren "uber unbest"andige und unzuverl"assige Netzwerkverbindungen.
+\item Konflikte k"onnen einfach "uber einen Merge-Algorithmus, gefunden und behoben werden.
+\item Revisions-B"aume erlauben auch komplexe Replikations-Topologien, wie z.B. Server-to-Server (f"ur mehrere Datenzentren) und Peer-to-Peer, ohne Datenverlust oder Konflikte bef"urchten zu m"ussen.
+\end{itemize}
+\cite{couch1}
+\section{Synchronisation mit Couchbase Sync Gateway}
+\section{Vorteile dieser Umsetzung}
+\section{Fazit}
+\bibliography{ref}
 \end{document}
