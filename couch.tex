@@ -24,14 +24,26 @@
 \bibliographystyle{alphadin} 
 
 \chapter{Einf"uhrung}
-\section{Datenbanksynchronisation}
+\section{Eigentliche Umsetzung im Diplomprojekt}
+Ziel des Diplomprojektes war es eine Applikation f"ur ein Tablet zu entwickeln, dass die Mitarbeiter der Lebensmittelversuchsanstalt bei der Probennahme im Supermarkt unterst"utzen soll. Insgesamt umfasst das Diplomprojekt eine Android Applikation und eine Server-Applikation. Bei der Probennahme werden Lebensmittel eingekauft, die am Tablet entsprechend in eine Datenbank eingetragen und sp"ater in der LVA f"ur die weiter Bearbeitung bereitgestellt werden. Die Daten werden anschlie"send in die interne Datenbank in der LVA synchronisiert und f"ur die Verarbeitung der Daten durch das Laborteam bereitgestellt. Auf weitere Vorg"ange innerhalb der Firma hat allerdings die Tablet-Applikation keinen Einfluss mehr. Deshalb wird hier lediglich auf den Teil der Speicherung in die Datenbank und vor allem die Synchronisation mit der LVA-Datenbank eingegangen. \\\\Innerhalb der Tablet Applikation wird eine SQLite Datenbank verwendet, da diese nicht sonderlich viele Ressourcen des Tablets ben"otigt und so eine einfache und angenehme Verwendung durch den Benutzer erm"oglicht. Die Datenbank erlaubt zudem nicht allzu viele Datenbanken und im Vergleich zur klassischen MySQL L"osung nur wenige Nutzer. Auf dem firmeneigenen Server l"auft eine klassische Mysql Instanz. Der Auftraggeber hatte zwar die Wahl offen gelassen welche Datenbankl"osung bevorzugt wird, allerdings gleichzeitig auch bekanntgegeben, dass bereits eine Lizenz f"ur Mysql vorhanden ist. Weitere in Betracht gezogene Datenbanksysteme waren PostgreSQL und ebenfalls auch f"ur das Serverprogramm SQLite. \\\\ Die Umsetzung sah so aus, dass Daten vom Tablet zun"achst an die Server-Applikation "uber Java-Streams versandt und anschlie"send von der Server-Applikation entsprechend in die Datenbank eingepflegt werden. W"ahrend Daten von der Datenbank auf das Tablet synchronisiert sind, d"urfen diese auch von niemandem bearbeitet werden. So wird Konsistenz innerhalb des Systems gew"ahrleistet.\cite{diploMeins}
+\section{Datenbanksynchronisation und Ans"atze}
+Die sichere Synchronisation von Daten in verteilten Systemen ist ein wichtiges Anliegen, da der Prozess in erster Linie Konsistenz der Daten gew"ahrleisten muss. Zu diesem Thema gibt es verschiedene Ans"atze auf die hier n"aher eingegangen wird.
+\subsection{Synchronisationsprobleme}
+Der Kernpunkt ist, dass ein zentrales Datenbanksystem und ein oder mehrere kleinere Systeme existieren. W"ahrend die zentrale Datenbank s"amtliche Daten des Systems beinhaltet, verf"ugen die kleineren Datenbanken nur "uber einen Bruchteil dieser Daten. Diese Bruchteile k"onnen von den einzelnen Ger"aten nat"urlich jederzeit ge"andert werden. Die Aufgabe besteht nun, dass all diese Bruchteile von Daten, wieder zur Hauptdatenbank synchronisiert werden ohne, dass gr"o"sere Konflikte entstehen.\\\\Zus"atzlich zu den bereits geschilderten Punkten, werden noch wichtige Nebenpunkte betrachtet.\\\\Die Verbindung der verteilten Datenbanken zum Hauptsystem muss nicht immer vorhanden sein. Das zentrale System muss wissen wann eine Verbindung besteht.\\\\Die verteilten Datenbanken besitzen nur einen Teil der in der Hauptdatenbank gespeicherten Daten, wobei allerdings keiner der Datenbest"ande mit einem anderen der verteilten Datenbanken "uberlappt. Nur die zentrale Datenbank besitzt den selben Datenbestand wie eine der verteilten Datenbanken.\\\\Ein Problem stellt hierbei ein Fall dar, wenn eine der verteilten Datenbanken vor"ubergehend offline geht und w"ahrenddessen Daten in der Hauptdatenbank ge"andert werden. Eine Methode um dies zu beheben w"are das simple "uberschreiben der Daten auf der entsprechenden Datenbank, falls einem der beiden Datenbanken eine h"ohere Priorit"at zugesprochen wird. Wenn zum Beispiel die verteilte Datenbank eine h"ohere Priorit"at besitzt als die zentrale Datenbank, kann die verteilte Datenbank die Daten der Hauptdatenbank einfach "uberschreiben. \\\\ Die Synchronisation der einzelnen Daten findet stets nur zwischen einer verteilten Datenbank und der zentralen Datenbank statt und keinesfalls unter zwei verteilten Datenbanken. Zus"atzlich sind die Systemzeiten der einzelnen verteilten Datenbanken nicht synchronisiert. In einem zusammengefasst kommt man zu folgenden Punkten:
+\begin{itemize}
+\item Die Daten sollten konsistent bleiben, auch wenn die Synchronisation einmal fehlschl"agt oder keine Verbindung besteht.
+\item Konflikthandhabung h"angt von den einzelnen Tabellen ab
+\item Verteilte Datenbanken werden hier nur mit der zentralen Datenbank synchronisiert und nicht untereinander
+\item Datenbankzeiten werden nicht synchronisiert
+\end{itemize}
+\subsection{Alternativen zur Synchronisation}
+
 \section{M"oglichkeiten}
 Wie bereits erw"ahnt ist Datenbanksynchronisation in verschiedensten Bereichen sinnvoll. Anschlie"send ein Überblick von bestehenden L"osungen um g"angige Datenbanken zu Synchronisieren:
 \begin{itemize}
 \item MySQL und SQLite
 \end{itemize}
-\section{Umsetzung im Diplomprojekt}
-
+ 
 \chapter{Couchbase Lite}
 Couchbase Lite ist eine leichtgewichtige, dokumenten-orientierte und leicht synchronisierbare Datenbank welche speziell f"ur den Einsatz in mobilen Anwendungen und Ger"aten geeignet ist.\\\\  Leichtgewichtig bedeutet:
 
@@ -61,7 +73,7 @@ Leicht synchronisierbar bedeutet:
 \end{itemize}
 \cite{couch1}
 \section{Synchronisation mit Couchbase Sync Gateway}
+\cite{sync1}
 \section{Vorteile dieser Umsetzung}
-\section{Fazit}
 \bibliography{ref}
 \end{document}
