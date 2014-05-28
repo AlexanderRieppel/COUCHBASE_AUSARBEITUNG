@@ -6,3 +6,8 @@
 \BOOKMARK [2][-]{subsection.1.3.2}{Implementierung in Hardware}{section.1.3}% 6
 \BOOKMARK [1][-]{section.1.4}{Threads}{chapter.1}% 7
 \BOOKMARK [1][-]{section.1.5}{JVM kompatible Sprachen}{chapter.1}% 8
+\BOOKMARK [0][-]{chapter.2}{Die Bestandteile der Java Virtual Machine}{}% 9
+\BOOKMARK [1][-]{section.2.1}{Classloader und Resolver}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.2}{Garbage Collector}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.3}{Execution Engine}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.4}{Java Hotspot JVM}{chapter.2}% 13
