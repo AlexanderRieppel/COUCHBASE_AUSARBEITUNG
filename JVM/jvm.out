@@ -1,1 +1,8 @@
 \BOOKMARK [0][-]{chapter.1}{Einf\374hrung}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Funktionsweise}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Sicherheit}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Optimierungsverfahren}{chapter.1}% 4
+\BOOKMARK [2][-]{subsection.1.3.1}{Dynamische Optimierung}{section.1.3}% 5
+\BOOKMARK [2][-]{subsection.1.3.2}{Implementierung in Hardware}{section.1.3}% 6
+\BOOKMARK [1][-]{section.1.4}{Threads}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.5}{JVM kompatible Sprachen}{chapter.1}% 8

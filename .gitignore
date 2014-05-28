@@ -2,10 +2,7 @@
 *.aux
 *.synctex.gz
 *.toc
-Scripting.bbl
-Scripting.blg
-Scripting.out
-couch.bbl
-couch.blg
-ref.bib.bak
-couch.out
+*.bbl
+*.blg
+*.out
+*.bib.bak
